@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alice Kok - Professional Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #ff7b7b, #667eea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            border: 5px solid rgba(255,255,255,0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .portfolio-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-role {
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .project-description ul {
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-year {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .cert-year h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .cert-list {
+            list-style: none;
+        }
+
+        .cert-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .cert-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .cert-list li:last-child {
+            border-bottom: none;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #f39c12;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: #f39c12;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: right;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 3rem 2rem;
+            margin: 3rem -2rem -2rem -2rem;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .future-vision {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .future-vision h3 {
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .contact-section {
+                margin: 2rem -1rem -1rem -1rem;
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="profile-img">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h1>Alice Kok</h1>
+                <p class="tagline">Learning & Development Professional | Instructional Designer | Public Health Educator</p>
+            </div>
+        </header>
+
+        <nav>
+            <div class="nav-container">
+                <a href="#home" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="#about" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    About Me
+                </a>
+                <a href="#portfolio" class="nav-item">
+                    <i class="fas fa-folder"></i>
+                    Portfolio
+                </a>
+                <a href="#certifications" class="nav-item">
+                    <i class="fas fa-certificate"></i>
+                    Certifications
+                </a>
+                <a href="#testimonials" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    Testimonials
+                </a>
+                <a href="#contact" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    Contact
+                </a>
+            </div>
+        </nav>
+
+        <main>
+            <section id="home">
+                <h2 class="section-title">
+                    <i class="fas fa-home"></i>
+                    Welcome to My Professional Portfolio
+                </h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #555;">
+                    Hi, I'm Alice Kok, a learning and development professional with a background in public health, instructional design, crisis management, and adult education. I design meaningful, performance-focused learning experiences that empower individuals and build organizational capability.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-top: 1rem;">
+                    This portfolio showcases my work across curriculum design, digital learning, facilitation, and coaching. I invite you to explore how my strengths, experiences, and commitment to continuous learning can bring value to learners and organizations alike.
+                </p>
+            </section>
+
+            <section id="about">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    About Me
+                </h2>
+                
+                <h3 style="color: #2c3e50; margin-bottom: 1rem;">Who I Am</h3>
+                <p style="margin-bottom: 2rem; color: #555; line-height: 1.8;">
+                    With over two decades of professional experience across aviation, healthcare, and public service, I have evolved from an intuitive educator to a strategic learning consultant driven by reflective practice, evidence-based design, and human-centered facilitation.
+                </p>
+
+                <h3 style="color: #2c3e50; margin-bottom: 1rem;">Top Skills:</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-chalkboard-teacher" style="color: #3498db; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Instructional Design & Adult Learning</h4>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-shield-alt" style="color: #e74c3c; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Outbreak Preparedness & Crisis Training</h4>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-users" style="color: #27ae60; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Stakeholder Engagement & Facilitation</h4>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-bullhorn" style="color: #f39c12; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <h4>Public Education & Health Communication</h4>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-user-tie" style="color: #9b59b6; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                        <h4>HR & Operational Leadership</h4>
+                    </div>
+                </div>
+
+                <div class="future-vision">
+                    <h3><i class="fas fa-rocket"></i> My Future as an Educator (5–10 Years)</h3>
+                    <p>I envision myself growing into a regional thought leader in instructional design and public health education. I will continue evolving through reflective practice, digital innovation, and community-centered learning strategies.</p>
+                </div>
+            </section>
+
+            <section id="portfolio">
+                <h2 class="section-title">
+                    <i class="fas fa-folder"></i>
+                    Portfolio
+                </h2>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-category">
+                        <h3 class="category-title">
+                            <i class="fas fa-book"></i>
+                            Curriculum & eLearning
+                        </h3>
+                        
+                        <div class="project-card">
+                            <h4 class="project-title">Measles Prevention Awareness (2025)</h4>
+                            <div class="project-role">Role: Instructional Designer</div>
+                            <div class="project-description">
+                                <ul>
+                                    <li>Designed microlearning e-module using Gagné's Nine Events of Instruction</li>
+                                    <li>Targeted at frontline healthcare workers for outbreak readiness</li>
+                                    <li>Included H5P branching, scenario-based learning, and learner self-checks</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4 class="project-title">Customer Service Microlearning: Service Heroes Academy (2025)</h4>
+                            <div class="project-role">Role: Designer & Writer</div>
+                            <div class="project-description">
+                                <ul>
+                                    <li>Developed a 4-part customer experience series with complaint handling simulations</li>
+                                    <li>Aligned learning outcomes with soft skills and empathy training</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4 class="project-title">Hand Hygiene eLearning Module (2025)</h4>
+                            <div class="project-role">Role: Lead Designer</div>
+                            <div class="project-description">
+                                <ul>
+                                    <li>Blended course with scenario-based activities for safer patient outcomes</li>
+                                    <li>Published through internal LMS and piloted across 3 healthcare clusters</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-category">
+                        <h3 class="category-title">
+                            <i class="fas fa-users"></i>
+                            Facilitation & Coaching
+                        </h3>
+                        
+                        <div class="project-card">
+                            <h4 class="project-title">Skills Framework Workshop (2024)</h4>
+                            <div class="project-role">Role: Trainer</div>
+                            <div class="project-description">
+                                <ul>
+                                    <li>Facilitated a workshop for mid-level HR/L&D professionals on performance gaps</li>
+                                    <li>Used case studies, role play, and SFw tools to guide career development planning</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4 class="project-title">National Community Leadership Institute (2025)</h4>
+                            <div class="project-role">Role: Guest Facilitator</div>
+                            <div class="project-description">
+                                <ul>
+                                    <li>Delivered 15-min training on "Community Leadership in Singapore's Changing Social Landscape"</li>
+                                    <li>Used props, learner engagement techniques, and participatory discussion</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <h4 class="project-title">NYCLC Mentorship (2024)</h4>
+                            <div class="project-role">Role: Mentor</div>
+                            <div class="project-description">
+                                <ul>
+                                    <li>Mentored youth leaders over a 3-day residential leadership programme</li>
+                                    <li>Guided reflective journaling and supported purpose-driven exploration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certifications">
+                <h2 class="section-title">
+                    <i class="fas fa-certificate"></i>
+                    Certifications
+                </h2>
+
+                <div class="certifications-grid">
+                    <div class="cert-year">
+                        <h3>2025</h3>
+                        <ul class="cert-list">
+                            <li>UiPath: Data Manipulation in RPA</li>
+                            <li>The Johns Hopkins University: Essential Epidemiologic Tools for Public Health Practice</li>
+                            <li>SHRI: Employment Legislation & Industrial Relations (ELIR)</li>
+                            <li>DDDLP – Diploma in Design & Development of Learning for Performance (In Progress)</li>
+                            <li>IHRP-CP Certification (In Progress)</li>
+                        </ul>
+                    </div>
+
+                    <div class="cert-year">
+                        <h3>2024</h3>
+                        <ul class="cert-list">
+                            <li>ACLP 2.0 – SUSS IAL</li>
+                            <li>SMU Advanced Certs: Healthcare Management & Leadership</li>
+                            <li>SMU Advanced Certs: Crisis Management</li>
+                            <li>SMU Advanced Certs: Organization Development</li>
+                            <li>ICF Coaching (NTUC LearningHub): Coaching Essentials</li>
+                            <li>ICF Coaching: Practicing Coach – Staff Development (In Progress)</li>
+                        </ul>
+                    </div>
+
+                    <div class="cert-year">
+                        <h3>2022</h3>
+                        <ul class="cert-list">
+                            <li>Vertical Institute: Tableau, Excel, Digital Marketing</li>
+                            <li>Aventis: Advanced Microsoft for Business Analysis</li>
+                            <li>CSC: Writing Policy Papers, Problem Solving & Decision Making</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="testimonials">
+                <h2 class="section-title">
+                    <i class="fas fa-comments"></i>
+                    Testimonials
+                </h2>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            Alice's eLearning design transformed our approach to infectious disease training – her modules are practical, clear, and deeply engaging.
+                        </div>
+                        <div class="testimonial-author">— Dr. Steven Ooi, NCID</div>
+                    </div>
+
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            Her ability to connect with youth and guide them meaningfully during NYCLC was truly inspiring.
+                        </div>
+                        <div class="testimonial-author">— Programme Coordinator, NYC</div>
+                    </div>
+
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            Alice brings heart and structure into every learning experience. She's reliable, reflective, and results-oriented.
+                        </div>
+                        <div class="testimonial-author">— Irene Lee, Coach & Mentor</div>
+                    </div>
+
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            From facilitation to strategic learning, Alice is a rare mix of empathy, precision, and professionalism.
+                        </div>
+                        <div class="testimonial-author">— Course Participant, Skills Framework Workshop</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section id="contact" class="contact-section">
+            <h2 style="margin-bottom: 1rem;">
+                <i class="fas fa-envelope"></i>
+                Contact Me
+            </h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                Thank you for visiting my portfolio! I'm always open to new learning partnerships, training opportunities, and collaborations in instructional design, healthcare education, and capability development.
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:alicek.learning@gmail.com">alicek.learning@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/alicekok" target="_blank">linkedin.com/in/alicekok</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <a href="#" onclick="alert('Resume download would be linked here')">Download My Resume</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Add active class styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .nav-item.active {
+                background: #3498db;
+                transform: translateY(-2px);
+            }
+            .nav-item.active::after {
+                width: 100%;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
